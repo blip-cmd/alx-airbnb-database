@@ -1,3 +1,13 @@
+## Files
+
+- `aggregations_and_window_functions.sql`: Contains SQL queries using aggregation and window functions.
+
+## Aggregations and Window Functions
+
+1. **Aggregation**: Finds the total number of bookings made by each user using COUNT and GROUP BY.
+2. **Window Function**: Ranks properties based on the total number of bookings they have received using RANK().
+
+See `aggregations_and_window_functions.sql` for the actual queries.
 
 # Complex SQL Joins and Subqueries
 
