@@ -1,0 +1,66 @@
+@startuml partitioning_strategy_comparison
+!theme cerulean-outline
+
+title Table Partitioning Strategies Comparison
+
+package "Range Partitioning by Year" {
+    database "Booking_2023" as p2023
+    database "Booking_2024" as p2024  
+    database "Booking_2025" as p2025
+    database "Booking_2026" as p2026
+    
+    note top of p2025
+        Best for:
+        - Historical analysis
+        - Year-over-year reports
+        - Data archival
+    end note
+}
+
+package "Range Partitioning by Month" {
+    database "Booking_2025_01" as m01
+    database "Booking_2025_02" as m02
+    database "Booking_2025_03" as m03
+    database "..." as m_more
+    database "Booking_2025_12" as m12
+    
+    note top of m03
+        Best for:
+        - High-volume systems
+        - Recent data queries
+        - Monthly reporting
+    end note
+}
+
+package "Hash Partitioning by User" {
+    database "Booking_Hash_0" as h0
+    database "Booking_Hash_1" as h1
+    database "Booking_Hash_2" as h2
+    database "..." as h_more
+    database "Booking_Hash_7" as h7
+    
+    note top of h1
+        Best for:
+        - Load balancing
+        - User-specific queries
+        - Even data distribution
+    end note
+}
+
+actor "Date Range Query" as drq
+actor "User History Query" as uhq
+actor "Monthly Report" as mr
+
+drq --> p2025 : Partition Pruning
+drq --> m01 : High Efficiency
+drq --> m02
+drq --> m03
+
+uhq --> h1 : Direct Access
+uhq --> h3 : Single Partition
+
+mr --> m01 : Perfect Match
+mr --> m02
+mr --> m03
+
+@enduml

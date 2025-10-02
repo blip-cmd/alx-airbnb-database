@@ -1,0 +1,54 @@
+@startuml index_performance_impact
+!theme cerulean-outline
+
+title Index Performance Impact Analysis
+
+skinparam rectangle {
+    BackgroundColor LightBlue
+    BorderColor DarkBlue
+}
+
+rectangle "Before Indexing" {
+    rectangle "Full Table Scan" as fts {
+        - Reads all rows: 1,000,000
+        - Execution time: 2.5 seconds
+        - I/O operations: 125,000
+        - Memory usage: 180 MB
+    }
+}
+
+rectangle "After B-Tree Indexing" {
+    rectangle "Index Seek" as idx {
+        - Reads relevant rows: 1,500
+        - Execution time: 0.12 seconds
+        - I/O operations: 150
+        - Memory usage: 5 MB
+    }
+}
+
+rectangle "Performance Metrics" {
+    rectangle "Improvements" as imp {
+        - 95% reduction in execution time
+        - 99% reduction in I/O operations
+        - 97% reduction in memory usage
+        - 99.85% reduction in rows examined
+    }
+}
+
+actor "Query Optimizer" as qo
+
+qo --> fts : Without Index
+qo --> idx : With Index
+
+fts --> imp : Baseline
+idx --> imp : Optimized
+
+note right of idx
+    Index Types Used:
+    - B-Tree for equality/range
+    - Composite for multi-column
+    - Covering for SELECT optimization
+    - Partial for filtered data
+end note
+
+@enduml

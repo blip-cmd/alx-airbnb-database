@@ -1,0 +1,65 @@
+@startuml database_performance_optimization_flow
+!theme cerulean-outline
+
+title Database Performance Optimization Workflow
+
+start
+
+:Identify Performance Issues;
+note right
+- Slow query log analysis
+- Performance schema monitoring
+- User complaints
+end note
+
+:Analyze Query Execution Plans;
+note right
+EXPLAIN ANALYZE queries
+- Identify table scans
+- Find missing indexes
+- Check join efficiency
+end note
+
+:Identify Optimization Opportunities;
+partition "Analysis Areas" {
+    :Index Analysis;
+    :Query Structure;
+    :Table Partitioning;
+    :Resource Utilization;
+}
+
+:Implement Optimizations;
+partition "Optimization Strategies" {
+    :Create Indexes;
+    :Refactor Queries;
+    :Partition Large Tables;
+    :Optimize Schema;
+}
+
+:Measure Performance Impact;
+note right
+- Before/after metrics
+- Query execution time
+- Resource utilization
+- Throughput analysis
+end note
+
+if (Performance Improved?) then (yes)
+    :Document Changes;
+    :Update Monitoring;
+    :Schedule Regular Reviews;
+else (no)
+    :Rollback Changes;
+    :Re-analyze Problem;
+endif
+
+:Continuous Monitoring;
+note right
+- Real-time performance metrics
+- Automated alerts
+- Regular performance reviews
+end note
+
+stop
+
+@enduml
